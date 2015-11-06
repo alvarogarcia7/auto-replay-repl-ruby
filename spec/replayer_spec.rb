@@ -4,21 +4,6 @@ RSpec.describe 'replayer' do
   it 'should execute and return a whole file' do
     expect(Replayer.execute_all_in('repl2.log').all).to eq(
       {
-        1=>{:error=>false, :result=>2, :code => "1+1"},
-        2=>{:error=>false, :result=>3, :code => "2+1"},
-        3=>{:error=>false, :result=>4, :code => "3+1"}})
-  end
-
-  it 'should execute and return single line' do
-    expect(Replayer.execute_all_in('repl2.log').at 2).to eq(
-      {:error=>false, :result=>3, :code => "2+1", :line => 2})
-  end
-end
-
-RSpec.describe 'formatter' do
-  it 'should execute and return a whole file' do
-    expect(Replayer.execute_all_in('repl2.log').all).to eq(
-      {
         1=>{:error=>false, :result=>2, :code => "1+1", :line => 1},
         2=>{:error=>false, :result=>3, :code => "2+1", :line => 2},
         3=>{:error=>false, :result=>4, :code => "3+1", :line => 3}})
@@ -26,6 +11,6 @@ RSpec.describe 'formatter' do
 
   it 'should execute and return single line' do
     expect(Replayer.execute_all_in('repl2.log').at 2).to eq(
-      {:error=>false, :result=>3, :code => "2+1"})
+      {:error=>false, :result=>3, :code => "2+1", :line => 2})
   end
 end
