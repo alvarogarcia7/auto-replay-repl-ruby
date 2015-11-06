@@ -1,6 +1,11 @@
 require_relative "../replayer.rb"
 
 RSpec.describe 'replayer' do
+
+  def to_s result
+  	result[:result] = result[:result].message
+  	result
+  end
   it 'should execute and return a whole file' do
     expect(Replayer.execute_all_in('repl2.log').all).to eq(
       {
@@ -12,6 +17,12 @@ RSpec.describe 'replayer' do
   it 'should execute and return single line' do
     expect(Replayer.execute_all_in('repl2.log').at 2).to eq(
       {:error=>false, :result=>3, :code => "2+1", :line => 2})
+  end
+
+  it 'should execute and return single error line' do
+  	line = Replayer.execute_all_in('spec/unexisting_variable.log').at 1
+    expect(to_s(line)).to eq(
+      {:error=>true, :result=>"undefined local variable or method `a' for Replayer:Class", :code => "1+a", :line => 1})
   end
 end
 

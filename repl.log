@@ -17,3 +17,9 @@ rspec init
 g s
 "aaa aa \n".trim
 "aaa aa \n".strip
+2+1
+1+a
+NameError
+source NameError
+NameError.new
+NameError.new "a"
