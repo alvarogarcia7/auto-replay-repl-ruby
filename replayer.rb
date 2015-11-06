@@ -20,7 +20,7 @@ class Replayer
   def self.execute_all lines
     result = {}
     line_number = 1
-    lines.map do |line|
+    lines.each do |line|
       begin
         r = eval(line)
         result[line_number] = {error: false, result: r}
