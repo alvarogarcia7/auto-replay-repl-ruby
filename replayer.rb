@@ -44,15 +44,21 @@ class Results
 
   def success result 
     @values[@line_number] = {error: false, result: result}
-    @line_number = @line_number + 1
+    increase_line_number
   end
 
   def error error 
     @values[@line_number] = {error: true, result: error}
-    @line_number = @line_number + 1
+    increase_line_number
   end
 
   def all
     @values
+  end
+
+  private
+
+  def increase_line_number
+     @line_number = @line_number + 1
   end
 end
