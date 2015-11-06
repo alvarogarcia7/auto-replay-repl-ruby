@@ -64,7 +64,7 @@ class Results
   end
 
   def store_at code, result, error
-    @values[@line_number] = {error: error, result: result, code: code}
+    @values[@line_number] = {error: error, result: result, code: code, line: @line_number}
     increase_line_number
   end
 end
