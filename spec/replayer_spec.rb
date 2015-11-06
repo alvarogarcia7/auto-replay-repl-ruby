@@ -7,7 +7,7 @@ RSpec.describe 'replayer' do
   	result
   end
   it 'should execute and return a whole file' do
-    expect(Replayer.execute_all_in('repl2.log').all).to eq(
+    expect(Replayer.execute_all_in('spec/repl2.log').all).to eq(
       {
         1=>{:error=>false, :result=>2, :code => "1+1", :line => 1},
         2=>{:error=>false, :result=>3, :code => "2+1", :line => 2},
@@ -15,7 +15,7 @@ RSpec.describe 'replayer' do
   end
 
   it 'should execute and return single line' do
-    expect(Replayer.execute_all_in('repl2.log').at 2).to eq(
+    expect(Replayer.execute_all_in('spec/repl2.log').at 2).to eq(
       {:error=>false, :result=>3, :code => "2+1", :line => 2})
   end
 
