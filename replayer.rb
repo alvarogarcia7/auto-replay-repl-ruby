@@ -1,10 +1,6 @@
 class Replayer
   def self.execute_all_in file
-    lines = [];
-
-    File.foreach( file ) do |line|
-      lines << "#{line}"
-    end
+    lines = read_lines(file)
 
     result = {}
     line_number = 1
@@ -20,4 +16,17 @@ class Replayer
 
     result
   end
+
+  private
+
+  def self.read_lines file
+    result = [];
+
+    File.foreach( file ) do |line|
+      result << "#{line}"
+    end
+    
+    result
+  end
+
 end
