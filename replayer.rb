@@ -1,7 +1,6 @@
 class Replayer
   def self.execute_all_in file
     lines = read_lines(file)
-
     execute_all(lines)
   end
 
@@ -43,13 +42,11 @@ class Results
   end
 
   def success result 
-    @values[@line_number] = {error: false, result: result}
-    increase_line_number
+    store_at result, false
   end
 
   def error error 
-    @values[@line_number] = {error: true, result: error}
-    increase_line_number
+    store_at error, true
   end
 
   def all
@@ -60,5 +57,10 @@ class Results
 
   def increase_line_number
      @line_number = @line_number + 1
+  end
+
+  def store_at payload, error
+    @values[@line_number] = {error: error, result: payload}
+    increase_line_number
   end
 end
