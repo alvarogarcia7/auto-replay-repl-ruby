@@ -25,9 +25,9 @@ class Replayer
     lines.each do |line|
       begin
         r = eval(line)
-        result.success(r)
+        result.success(line.strip, r)
       rescue StandardError => e
-        result.error(e)
+        result.error(line.strip, e)
       end
     end
     result
@@ -41,12 +41,12 @@ class Results
     @line_number = 1
   end
 
-  def success result 
-    store_at result, false
+  def success code, result
+    store_at code, result, false
   end
 
-  def error error 
-    store_at error, true
+  def error code, error
+    store_at code, error, true
   end
 
   def all
@@ -63,8 +63,8 @@ class Results
      @line_number = @line_number + 1
   end
 
-  def store_at payload, error
-    @values[@line_number] = {error: error, result: payload}
+  def store_at code, result, error
+    @values[@line_number] = {error: error, result: result, code: code}
     increase_line_number
   end
 end

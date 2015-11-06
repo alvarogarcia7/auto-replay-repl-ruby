@@ -15,3 +15,5 @@ load  "replayer.rb"
 Replayer.execute_all_in "repl2.log"
 rspec init
 g s
+"aaa aa \n".trim
+"aaa aa \n".strip
