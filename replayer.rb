@@ -18,26 +18,36 @@ class Replayer
   end
 
   def self.execute_all lines
-    result = {}
+    result = Results.new
     line_number = 1
     lines.each do |line|
       begin
         r = eval(line)
-        add_result(result, line_number, r)
+        result.success(line_number, r)
       rescue StandardError => e
-        add_error(result, line_number, e)
+        result.error(line_number, e)
       end
       line_number = line_number + 1
     end
     result
   end
 
-  def self.add_result holder, line_number, result 
-    holder[line_number] = {error: false, result: result}
+end
+
+class Results
+  def initialize
+    @values = {}
   end
 
-  def self.add_error holder, line_number, error 
-    holder[line_number] = {error: true, result: error}
+  def success line_number, result 
+    @values[line_number] = {error: false, result: result}
   end
 
+  def error line_number, error 
+    @values[line_number] = {error: true, result: error}
+  end
+
+  def all
+    @values
+  end
 end
