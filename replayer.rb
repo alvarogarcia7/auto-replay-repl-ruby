@@ -23,13 +23,21 @@ class Replayer
     lines.each do |line|
       begin
         r = eval(line)
-        result[line_number] = {error: false, result: r}
+        add_result(result, line_number, r)
       rescue StandardError => e
-        result[line_number] = {error: true, result: e}
+        add_error(result, line_number, e)
       end
       line_number = line_number + 1
     end
     result
+  end
+
+  def self.add_result holder, line_number, result 
+    holder[line_number] = {error: false, result: result}
+  end
+
+  def self.add_error holder, line_number, error 
+    holder[line_number] = {error: true, result: error}
   end
 
 end
