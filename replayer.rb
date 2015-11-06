@@ -53,6 +53,10 @@ class Results
     @values
   end
 
+  def at line
+    @values[line]
+  end
+
   private
 
   def increase_line_number
