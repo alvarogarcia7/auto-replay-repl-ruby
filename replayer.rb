@@ -19,6 +19,10 @@ class Replayer
 
   def self.execute_all lines
     result = Results.new
+    cumulate_in result, lines
+  end
+
+  def self.cumulate_in result, lines
     lines.each do |line|
       begin
         r = eval(line)
