@@ -68,3 +68,9 @@ class Results
     increase_line_number
   end
 end
+
+class PryFormatter
+  def self.format line
+    "[#{line[:line]}] pry> #{line[:code]}\n=> #{line[:result]}"
+  end
+end
