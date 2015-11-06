@@ -1,0 +1,1 @@
+lines = []; File.foreach( './repl.log' ) do |line|  lines << "#{line}" end
