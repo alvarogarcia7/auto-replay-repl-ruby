@@ -23,3 +23,9 @@ NameError
 source NameError
 NameError.new
 NameError.new "a"
+[].class
+{}.class
+{}.key? ""
+{a: 2}.key? :a
+{a: 2}.hash
+{a: 2}.values
