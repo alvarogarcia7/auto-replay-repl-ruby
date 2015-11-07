@@ -12,6 +12,7 @@ RSpec.describe 'replayer' do
     end
     results
   end
+  
   it 'should execute and return a whole file' do
     expect(Replayer.execute_all_in('spec/repl2.log').all).to eq(
       {
