@@ -76,14 +76,18 @@ end
 
 class PryFormatter
   def self.format line
-    code = code(line)
-    result = result(line)
-    line_number = line[:line]
+    code = code line 
+    result = result line
+    line_number = line_number line
 
     "[#{line_number}] pry> #{code}\n=> #{result}"
   end
 
   private
+
+  def self.line_number line
+    line[:line]
+  end
 
   def self.code line
     code = "#{line[:code]}"
