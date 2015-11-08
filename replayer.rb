@@ -50,11 +50,7 @@ class Results
   end
 
   def error code, error
-    payload = {
-      whole: error,
-      class: error.class,
-      message: error.message} 
-    add_result ({error: true, result: payload, code: code})
+    a_new.error_line.with(code).producing(error)
   end
 
   def all
@@ -85,6 +81,12 @@ class ResultsBuilder
 
   def producing result
     @result = result
+    if @error
+      @result = {
+        whole: result,
+        class: result.class,
+        message: result.message} 
+    end
     build
   end
 
@@ -94,6 +96,11 @@ class ResultsBuilder
 
   def successful_line
     @error = false
+    self
+  end
+
+  def error_line
+    @error = true
     self
   end
 
