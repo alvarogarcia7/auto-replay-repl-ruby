@@ -47,6 +47,7 @@ RSpec.describe 'replayer' do
 end
 
 RSpec.describe 'formatter' do
+
   it 'should format a single success line' do
     expect(PryFormatter.format({:error=>false, :result=>3, :code => "2+1", :line => 2})).to eq(
       "[2] pry> 2+1\n=> 3")
