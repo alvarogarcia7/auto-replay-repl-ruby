@@ -42,7 +42,7 @@ class Results
   end
 
   def success code, result
-    store_at code, result
+    add_result ({error: false, result: result, code: code})
   end
 
   def error code, error
@@ -50,7 +50,7 @@ class Results
       whole: error,
       class: error.class,
       message: error.message} 
-    store_at code, payload, true
+    add_result ({error: true, result: payload, code: code})
   end
 
   def all
@@ -67,9 +67,9 @@ class Results
      @line_number = @line_number + 1
   end
 
-  def store_at code, payload, *errors
-    error = errors[0] || false
-    @values[@line_number] = {error: error, result: payload, code: code, line: @line_number}
+  def add_result payload
+    payload[:line] = @line_number
+    @values[@line_number] = payload
     increase_line_number
   end
 end
