@@ -46,11 +46,11 @@ class Results
   end
 
   def error code, error
-    error = {
+    payload = {
       whole: error,
       class: error.class,
       message: error.message} 
-    store_at code, error, true
+    store_at code, payload, true
   end
 
   def all
@@ -67,8 +67,8 @@ class Results
      @line_number = @line_number + 1
   end
 
-  def store_at code, result, error
-    @values[@line_number] = {error: error, result: result, code: code, line: @line_number}
+  def store_at code, payload, error
+    @values[@line_number] = {error: error, result: payload, code: code, line: @line_number}
     increase_line_number
   end
 end
