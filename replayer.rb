@@ -79,21 +79,6 @@ class ResultsBuilder
     @results = results
   end
 
-  def producing result
-    @result = result
-    if @error
-      @result = {
-        whole: result,
-        class: result.class,
-        message: result.message} 
-    end
-    build
-  end
-
-  def add_result payload
-    @results.add_result payload
-  end
-
   def successful_line
     @error = false
     self
@@ -109,9 +94,24 @@ class ResultsBuilder
     self
   end
 
+  def producing result
+    @result = result
+    if @error
+      @result = {
+        whole: result,
+        class: result.class,
+        message: result.message} 
+    end
+    build
+  end
+
   def build
     add_result ({error: @error, result: @result, code: @code})
     self
+  end
+
+  def add_result payload
+    @results.add_result payload
   end
 end
 
