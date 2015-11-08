@@ -42,15 +42,15 @@ class Results
   end
 
   def success code, result
-    a_new.successful_line.with(code).producing(result)
+    a_new_line.with(code).producing(result)
   end
 
-  def a_new
+  def a_new_line
     @line = ResultsBuilder.new (self)
   end
 
   def error code, error
-    a_new.error_line.with(code).producing(error)
+    a_new_line.with(code).producing_error(error)
   end
 
   def all
@@ -79,22 +79,19 @@ class ResultsBuilder
     @results = results
   end
 
-  def successful_line
-    @error = false
-    self
-  end
-
-  def error_line
-    @error = true
-    self
-  end
-
   def with code
     @code = code
     self
   end
 
   def producing result
+    @error = false
+    obtain result
+    build
+  end
+
+  def producing_error result
+    @error = true
     obtain result
     build
   end
