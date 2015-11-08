@@ -46,6 +46,10 @@ class Results
   end
 
   def error code, error
+    error = {
+      whole: error,
+      class: error.class,
+      message: error.message} 
     store_at code, error, true
   end
 
@@ -71,6 +75,14 @@ end
 
 class PryFormatter
   def self.format line
-    "[#{line[:line]}] pry> #{line[:code]}\n=> #{line[:result]}"
+    if line[:error] then
+      code = "#{line[:code]} # #{line[:result][:class]}"
+      result = "# #{line[:result][:message]}"
+    else
+      code = "#{line[:code]}"
+      result = "#{line[:result]}"
+    end
+
+    "[#{line[:line]}] pry> #{code}\n=> #{result}"
   end
 end

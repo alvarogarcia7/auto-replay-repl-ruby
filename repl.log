@@ -29,3 +29,7 @@ NameError.new "a"
 {a: 2}.key? :a
 {a: 2}.hash
 {a: 2}.values
+{a: 2, b: nil}.flat
+{a: 2, b: nil}
+{a: 2, b: nil}.flat_map
+{a: 2, b: nil}.flatten
