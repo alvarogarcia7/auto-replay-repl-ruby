@@ -84,6 +84,8 @@ class PryFormatter
       result = "# #{line[:result][:message]}"
     end
 
-    "[#{line[:line]}] pry> #{code}\n=> #{result}"
+    line_number = line[:line]
+
+    "[#{line_number}] pry> #{code}\n=> #{result}"
   end
 end
