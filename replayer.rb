@@ -42,7 +42,11 @@ class Results
   end
 
   def success code, result
-    add_result ({error: false, result: result, code: code})
+    a_new.successful_line.with(code).producing(result)
+  end
+
+  def a_new
+    @line = ResultsBuilder.new (self)
   end
 
   def error code, error
@@ -61,16 +65,46 @@ class Results
     @values[line]
   end
 
+  def add_result payload
+    payload[:line] = @line_number
+    @values[@line_number] = payload
+    increase_line_number
+  end
   private
 
   def increase_line_number
      @line_number = @line_number + 1
   end
 
+end
+
+class ResultsBuilder
+  def initialize results
+    @results = results
+  end
+
+  def producing result
+    @result = result
+    build
+  end
+
   def add_result payload
-    payload[:line] = @line_number
-    @values[@line_number] = payload
-    increase_line_number
+    @results.add_result payload
+  end
+
+  def successful_line
+    @error = false
+    self
+  end
+
+  def with code
+    @code = code
+    self
+  end
+
+  def build
+    add_result ({error: @error, result: @result, code: @code})
+    self
   end
 end
 
