@@ -84,8 +84,6 @@ class PryFormatter
   end
 
   def format
-    code = code()
-
     "[#{line_number}] pry> #{code}\n=> #{result}"
   end
 
