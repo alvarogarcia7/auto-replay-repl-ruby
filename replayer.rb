@@ -45,12 +45,12 @@ class Results
     a_new_line.with(code).producing(result)
   end
 
-  def a_new_line
-    @line = ResultsBuilder.new (self)
-  end
-
   def error code, error
     a_new_line.with(code).producing_error(error)
+  end
+
+  def a_new_line
+    @line = ResultsBuilder.new (self)
   end
 
   def all
