@@ -86,13 +86,13 @@ class ResultsBuilder
 
   def producing result
     @error = false
-    obtain result
+    compute result
     build
   end
 
   def producing_error result
     @error = true
-    obtain result
+    compute result
     build
   end
 
@@ -101,7 +101,7 @@ class ResultsBuilder
     self
   end
 
-  def obtain result
+  def compute result
     @result = result
     if @error
       @result = {
