@@ -50,7 +50,7 @@ class Results
   end
 
   def a_new_line
-    @line = ResultsBuilder.new (self)
+    ResultsBuilder.new (self)
   end
 
   def all
