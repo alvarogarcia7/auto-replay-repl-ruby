@@ -49,10 +49,6 @@ class Results
     a_new_line.with(code).producing_error(error)
   end
 
-  def a_new_line
-    ResultsBuilder.new (self)
-  end
-
   def all
     @values
   end
@@ -66,7 +62,12 @@ class Results
     @values[@line_number] = payload
     increase_line_number
   end
+
   private
+
+  def a_new_line
+    ResultsBuilder.new (self)
+  end
 
   def increase_line_number
      @line_number = @line_number + 1
