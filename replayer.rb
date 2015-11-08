@@ -79,15 +79,15 @@ class PryFormatter
     new(line).format
   end
 
-  def initialize line
-    @line = line
-  end
-
   def format
     "[#{line_number}] pry> #{code}\n=> #{result}"
   end
 
   private
+
+  def initialize line
+    @line = line
+  end
 
   def line_number
     @line[:line]
