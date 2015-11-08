@@ -76,20 +76,30 @@ end
 
 class PryFormatter
   def self.format line
-    code = "#{line[:code]}"
-    result = "#{line[:result]}"
-
-    if error? line then
-      code = code + " # #{line[:result][:class]}"
-      result = "# #{line[:result][:message]}"
-    end
-
+    code = code(line)
+    result = result(line)
     line_number = line[:line]
 
     "[#{line_number}] pry> #{code}\n=> #{result}"
   end
 
   private
+
+  def self.code line
+    code = "#{line[:code]}"
+    if error? line then
+      code = code + " # #{line[:result][:class]}"
+    end
+    code
+  end
+
+  def self.result line
+    result = "#{line[:result]}"
+    if error? line then
+      result = "# #{line[:result][:message]}"
+    end
+    result
+  end
 
   def self.error? line
     line[:error]
