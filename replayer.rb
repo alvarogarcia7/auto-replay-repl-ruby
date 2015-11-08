@@ -95,6 +95,16 @@ class ResultsBuilder
   end
 
   def producing result
+    obtain result
+    build
+  end
+
+  def build
+    add_result ({error: @error, result: @result, code: @code})
+    self
+  end
+
+  def obtain result
     @result = result
     if @error
       @result = {
@@ -102,12 +112,6 @@ class ResultsBuilder
         class: result.class,
         message: result.message} 
     end
-    build
-  end
-
-  def build
-    add_result ({error: @error, result: @result, code: @code})
-    self
   end
 
   def add_result payload
